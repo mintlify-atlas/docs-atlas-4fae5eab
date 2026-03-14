@@ -1,80 +1,207 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Get your ZOODOM site up and running in minutes"
 ---
 
-## Get started in three steps
+# Quickstart
 
-Get your documentation site running locally and make your first customization.
+Get started with ZOODOM and have your development environment running in under 5 minutes.
 
-### Step 1: Set up your local environment
+## Prerequisites
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+Before you begin, ensure you have:
 
-### Step 2: Deploy your changes
+- Node.js version 22.12.0 or higher
+- npm, yarn, or pnpm package manager
+- A code editor (VS Code recommended)
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+<Info>
+  Check your Node.js version with `node --version`. ZOODOM requires Node.js >= 22.12.0 as specified in package.json.
+</Info>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+## Quick Start
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+<Steps>
+  <Step title="Clone the repository">
+    Clone the ZOODOM repository to your local machine:
 
-### Step 3: Go live
+    ```bash
+    git clone https://github.com/Iceheop/zoodom.git
+    cd zoodom
+    ```
+  </Step>
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+  <Step title="Install dependencies">
+    Install the project dependencies using your preferred package manager:
 
-## Next steps
+    <CodeGroup>
+    ```bash npm
+    npm install
+    ```
 
-Now that you have your docs running, explore these key features:
+    ```bash yarn
+    yarn install
+    ```
+
+    ```bash pnpm
+    pnpm install
+    ```
+    </CodeGroup>
+
+    This will install Astro 6.0.4 and all required dependencies.
+  </Step>
+
+  <Step title="Start the development server">
+    Run the development server:
+
+    <CodeGroup>
+    ```bash npm
+    npm run dev
+    ```
+
+    ```bash yarn
+    yarn dev
+    ```
+
+    ```bash pnpm
+    pnpm dev
+    ```
+    </CodeGroup>
+
+    The site will be available at `http://localhost:4321`.
+  </Step>
+
+  <Step title="Explore the site">
+    Open your browser and navigate to `http://localhost:4321` to see the ZOODOM homepage.
+
+    You should see:
+    - The responsive navigation bar with logo
+    - The hero section with "Bienvenido a nuestro zoológico"
+    - The Bootstrap-styled interface
+  </Step>
+</Steps>
+
+## What You'll See
+
+The default homepage includes:
+
+### Hero Section
+
+The hero section features a two-column layout with a welcome message and call-to-action button:
+
+```astro index.astro
+<section class="col-lg-6 col-md-6 col-12">
+  <h1 class="display-1 fw-bold">Bienvenido a nuestro zoológico</h1>
+  <p>Planea una salida en familia a nuestro parque zoológico nacional para que te sectioniertas en una esperiencia innovidable.</p>
+  <button class="btn btn-brand px-5 py-2 rounded-pill">Reservar ahora</button>
+</section>
+```
+
+### Navigation Bar
+
+The responsive navbar with Spanish navigation items:
+
+```astro
+<ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0 gap-lg-4 pt-3 pt-lg-0">
+  <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Especies</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Galeria</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+</ul>
+```
+
+## Development Commands
+
+Here are all available npm scripts from package.json:
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the Astro development server at http://localhost:4321 |
+| `npm run build` | Build the production site to the `dist/` directory |
+| `npm run preview` | Preview the production build locally |
+| `npm run astro` | Run Astro CLI commands |
+
+<Tip>
+  Use `npm run dev` during development for hot module reloading. Changes to Astro components, CSS, and assets will reflect immediately.
+</Tip>
+
+## Build for Production
+
+When you're ready to deploy, build the production site:
+
+<CodeGroup>
+```bash npm
+npm run build
+```
+
+```bash yarn
+yarn build
+```
+
+```bash pnpm
+pnpm build
+```
+</CodeGroup>
+
+This creates an optimized production build in the `dist/` directory.
+
+## Next Steps
+
+Now that you have ZOODOM running, explore these key areas:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card
+    title="Components"
+    icon="puzzle-piece"
+    href="/components/head"
+  >
+    Learn about the Head, Layout, and Navbar components
+  </Card>
+  <Card
+    title="Color System"
+    icon="palette"
+    href="/styling/color-system"
+  >
+    Explore the custom green color palette
+  </Card>
+  <Card
+    title="Responsive Design"
+    icon="mobile"
+    href="/features/responsive-design"
+  >
+    Understand Bootstrap responsive utilities
+  </Card>
+  <Card
+    title="Deploy to Netlify"
+    icon="cloud"
+    href="/deployment/netlify"
+  >
+    Deploy your site to production
+  </Card>
 </CardGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+## Troubleshooting
+
+<Accordion title="Port 4321 is already in use">
+  If port 4321 is already in use, Astro will automatically try the next available port (4322, 4323, etc.). Check the terminal output for the actual URL.
+</Accordion>
+
+<Accordion title="Module not found errors">
+  Try deleting `node_modules/` and the lockfile, then reinstalling:
+  
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
+</Accordion>
+
+<Accordion title="Node version mismatch">
+  Ensure you're running Node.js >= 22.12.0:
+  
+  ```bash
+  node --version
+  ```
+  
+  If your version is lower, update Node.js using nvm or your preferred method.
+</Accordion>

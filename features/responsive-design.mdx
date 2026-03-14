@@ -1,0 +1,255 @@
+---
+title: "Responsive Design"
+description: "Learn how ZOODOM uses Bootstrap responsive utilities to create adaptive layouts across mobile, tablet, and desktop"
+---
+
+# Responsive Design
+
+ZOODOM leverages Bootstrap's responsive utility classes to create layouts that adapt seamlessly across device sizes.
+
+## Bootstrap Breakpoints
+
+Bootstrap 5 uses the following breakpoints:
+
+| Breakpoint | Class Infix | Dimensions |
+|------------|-------------|------------|
+| Extra small | None | Less than 576px |
+| Small | `sm` | 576px and up |
+| Medium | `md` | 768px and up |
+| Large | `lg` | 992px and up |
+| Extra large | `xl` | 1200px and up |
+| Extra extra large | `xxl` | 1400px and up |
+
+## Display Utilities
+
+### Mobile vs Desktop Logo
+
+ZOODOM uses responsive display classes to show different logo sizes:
+
+```astro
+<!-- Mobile -->
+<img
+  src={logo.src}
+  class="img-fluid d-inline d-sm-none"
+  width="80"
+  alt="Logo"
+/>
+<!-- Tablet/Desktop -->
+<img
+  src={logo.src}
+  class="img-fluid d-none d-sm-inline"
+  width="110"
+  alt="Logo"
+/>
+```
+
+<Tabs>
+  <Tab title="d-inline d-sm-none">
+    - `d-inline` - Display inline by default
+    - `d-sm-none` - Hide on small screens and above
+    - **Result**: Visible only on extra small screens (less than 576px)
+  </Tab>
+  <Tab title="d-none d-sm-inline">
+    - `d-none` - Hidden by default
+    - `d-sm-inline` - Display inline on small screens and above
+    - **Result**: Visible on screens 576px and up
+  </Tab>
+</Tabs>
+
+### Hero Image Visibility
+
+The hero image is hidden on mobile devices:
+
+```html
+<section class="col-lg-6 col-md-6 col-12 d-none d-md-block">
+  <img src={HeroImg.src} class="img-fluid hero-img position-absolute bottom-0 end-0 pe-5" alt="Hero Image">
+</section>
+```
+
+<Info>
+  The `d-none d-md-block` classes hide the image on small screens and display it as a block element on medium screens and above.
+</Info>
+
+## Grid System
+
+### Responsive Columns
+
+The hero section uses responsive column classes:
+
+```html
+<section class="col-lg-6 col-md-6 col-12">
+  <!-- Content -->
+</section>
+```
+
+<Tabs>
+  <Tab title="Mobile (xs)">
+    ```html
+    col-12
+    ```
+    Full width (100%) - content stacks vertically
+  </Tab>
+  <Tab title="Tablet (md)">
+    ```html
+    col-md-6
+    ```
+    Half width (50%) - two columns side by side
+  </Tab>
+  <Tab title="Desktop (lg)">
+    ```html
+    col-lg-6
+    ```
+    Maintains half width (50%) with enhanced spacing
+  </Tab>
+</Tabs>
+
+## Responsive Spacing
+
+### Container Padding
+
+The container uses responsive horizontal padding:
+
+```html
+<section class="container px-3 px-lg-5 py-3">
+```
+
+| Class | Breakpoint | Padding |
+|-------|------------|----------|
+| `px-3` | All sizes | 1rem (16px) horizontal |
+| `px-lg-5` | ≥992px | 3rem (48px) horizontal |
+| `py-3` | All sizes | 1rem (16px) vertical |
+
+<Note>
+  The `px-lg-5` overrides `px-3` on large screens, providing more breathing room on desktop displays.
+</Note>
+
+### Navigation Spacing
+
+The navbar navigation uses responsive spacing:
+
+```html
+<ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0 gap-lg-4 pt-3 pt-lg-0">
+```
+
+<Tabs>
+  <Tab title="Mobile">
+    - `mb-2` - Bottom margin
+    - `pt-3` - Top padding for spacing from toggle button
+    - No left margin
+    - No gap between items (vertical stack)
+  </Tab>
+  <Tab title="Desktop (lg+)">
+    - `ms-lg-auto` - Push items to the right
+    - `mb-lg-0` - Remove bottom margin
+    - `gap-lg-4` - Add horizontal gap between items
+    - `pt-lg-0` - Remove top padding
+  </Tab>
+</Tabs>
+
+## Responsive Typography
+
+While not using Bootstrap's responsive text utilities, custom CSS could be enhanced:
+
+```css
+h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--color-neutral-black-900);
+}
+```
+
+<Tip>
+  Consider adding media queries for smaller font sizes on mobile:
+  ```css
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+  ```
+</Tip>
+
+## Navbar Collapse Behavior
+
+The navbar uses `navbar-expand-lg` for responsive collapsing:
+
+```html
+<nav class="navbar navbar-expand-lg navbar-light">
+```
+
+<Tabs>
+  <Tab title="Mobile (<992px)">
+    - Hamburger menu appears
+    - Navigation items collapse into dropdown
+    - Toggler button controls menu visibility
+    - Vertical menu layout
+  </Tab>
+  <Tab title="Desktop (≥992px)">
+    - Horizontal navigation bar
+    - All items visible
+    - No hamburger menu
+    - Items aligned to the right
+  </Tab>
+</Tabs>
+
+## Common Responsive Patterns
+
+### Pattern 1: Hide on Mobile
+
+```html
+<div class="d-none d-md-block">
+  <!-- Hidden on mobile, visible on tablet+ -->
+</div>
+```
+
+### Pattern 2: Mobile-Only Content
+
+```html
+<div class="d-block d-md-none">
+  <!-- Visible on mobile only -->
+</div>
+```
+
+### Pattern 3: Responsive Padding
+
+```html
+<div class="px-3 px-lg-5">
+  <!-- Small padding on mobile, large padding on desktop -->
+</div>
+```
+
+### Pattern 4: Stacked to Side-by-Side
+
+```html
+<div class="col-12 col-md-6">
+  <!-- Full width on mobile, half width on tablet+ -->
+</div>
+```
+
+## Best Practices
+
+<Info>
+  **Mobile-First Approach**: Bootstrap uses mobile-first CSS. Base styles apply to all screens, then larger breakpoints add enhancements.
+</Info>
+
+<Tip>
+  **Test at Breakpoints**: Always test your layouts at 576px, 768px, 992px, 1200px, and 1400px to ensure smooth transitions.
+</Tip>
+
+<Note>
+  **Avoid Excessive Classes**: While Bootstrap provides many responsive utilities, aim for clean, readable markup by combining classes thoughtfully.
+</Note>
+
+## Utility Class Reference
+
+| Utility | Purpose | Example |
+|---------|---------|----------|
+| `d-{breakpoint}-{value}` | Display control | `d-none d-md-block` |
+| `p{side}-{breakpoint}-{size}` | Padding | `px-3 px-lg-5` |
+| `m{side}-{breakpoint}-{size}` | Margin | `ms-lg-auto` |
+| `gap-{breakpoint}-{size}` | Flexbox gap | `gap-lg-4` |
+| `col-{breakpoint}-{size}` | Grid columns | `col-12 col-md-6` |
+
+<Tip>
+  Use `img-fluid` class on all images to make them responsive by default: `max-width: 100%; height: auto;`
+</Tip>

@@ -1,0 +1,136 @@
+---
+title: 'Deploy to Netlify'
+description: 'Learn how to deploy your ZOODOM site to Netlify'
+---
+
+## Overview
+
+ZOODOM is configured to deploy to Netlify at `https://zoodomi.netlify.app`. This guide walks you through the deployment process.
+
+## Prerequisites
+
+<Note>
+  Ensure you have a Netlify account and the site repository connected to your GitHub account.
+</Note>
+
+<Warning>
+  Node.js version **22.12.0 or higher** is required to build this project.
+</Warning>
+
+## Deployment Steps
+
+<Steps>
+  <Step title="Connect Repository">
+    Log in to your Netlify dashboard and click **"Add new site"** > **"Import an existing project"**.
+    
+    Select your Git provider (GitHub, GitLab, or Bitbucket) and authorize Netlify to access your repository.
+  </Step>
+
+  <Step title="Configure Build Settings">
+    Configure the following build settings:
+    
+    **Build command:**
+    ```bash
+    astro build
+    ```
+    
+    **Publish directory:**
+    ```bash
+    dist/
+    ```
+    
+    **Node version:**
+    
+    Set the `NODE_VERSION` environment variable to `22.12.0` or higher.
+  </Step>
+
+  <Step title="Set Environment Variables">
+    If your site requires environment variables, add them in the Netlify dashboard under **Site settings** > **Environment variables**.
+    
+    <Info>
+      The site URL is configured in `astro.config.mjs` as `https://zoodomi.netlify.app`.
+    </Info>
+  </Step>
+
+  <Step title="Deploy">
+    Click **"Deploy site"** to start the build process.
+    
+    Netlify will:
+    1. Install dependencies using npm
+    2. Run the build command (`astro build`)
+    3. Publish the `dist/` directory
+    4. Assign a URL to your deployment
+  </Step>
+
+  <Step title="Verify Deployment">
+    Once deployment completes, visit your site at the assigned URL or your custom domain.
+    
+    Check the build logs in the Netlify dashboard if you encounter any issues.
+  </Step>
+</Steps>
+
+## Site Configuration
+
+The project is pre-configured for Netlify deployment with the following settings in `astro.config.mjs`:
+
+```javascript
+// astro.config.mjs
+export default defineConfig({
+    site: 'https://zoodomi.netlify.app',
+});
+```
+
+This setting ensures that:
+- Canonical URLs are correctly generated
+- Sitemaps use the production domain
+- Social media meta tags point to the correct URLs
+
+## Build Output
+
+When you run `astro build`, the following happens:
+
+1. Astro compiles your pages and components
+2. Static assets are optimized
+3. Everything is output to the `dist/` directory
+
+The `dist/` directory structure:
+```
+dist/
+├── index.html
+├── assets/
+│   ├── css/
+│   └── js/
+└── images/
+```
+
+## Automatic Deployments
+
+<Info>
+  Configure automatic deployments by enabling **"Auto publish"** in your Netlify site settings. This will trigger a new deployment whenever you push to your main branch.
+</Info>
+
+## Custom Domain
+
+To use a custom domain:
+
+1. Go to **Site settings** > **Domain management**
+2. Click **"Add custom domain"**
+3. Follow Netlify's instructions to configure DNS
+
+<Note>
+  Remember to update the `site` setting in `astro.config.mjs` if you change your domain.
+</Note>
+
+## Troubleshooting
+
+### Build Failures
+
+If your build fails, check:
+
+- Node.js version is set to 22.12.0 or higher
+- All dependencies are listed in `package.json`
+- Build command is correctly set to `astro build`
+
+### 404 Errors
+
+Ensure the publish directory is set to `dist/` (not `dist` without the trailing slash).

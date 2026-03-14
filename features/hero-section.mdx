@@ -1,0 +1,162 @@
+---
+title: "Hero Section"
+description: "Explore ZOODOM's hero section with two-column layout, custom button styling, and responsive image handling"
+---
+
+# Hero Section
+
+The hero section creates a strong visual impact with a two-column layout featuring welcome text and a decorative image.
+
+## Two-Column Layout
+
+The hero uses Bootstrap's grid system to create a responsive two-column layout:
+
+```astro
+<header class="position-relative py-md-5 py-lg-5">
+  <section class="container px-3 px-lg-5 pb-5 py-lg-5 my-5">
+    <section class="row d-flex justify-content-between align-items-center">
+      <section class="col-lg-6 col-md-6 col-12">
+        <h1 class="display-1 fw-bold">Bienvenido a nuestro zoológico</h1>
+        <p>Planea una salida en familia a nuestro parque zoológico nacional para que te sectioniertas en una esperiencia innovidable.</p>
+        <button class="btn btn-brand px-5 py-2 rounded-pill">Reservar ahora</button>
+      </section>
+      <section class="col-lg-6 col-md-6 col-12 d-none d-md-block">
+        <img src={HeroImg.src} class="img-fluid hero-img position-absolute bottom-0 end-0 pe-5" alt="Hero Image">
+      </section>
+    </section>
+  </section>
+</header>
+```
+
+## Image Import in Astro
+
+Images are imported at the top of the Astro file for optimization:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import logo from'../assets/logo.svg';
+import HeroImg from '../assets/hero.png';
+---
+```
+
+<Note>
+  Astro automatically optimizes imported images and generates the appropriate `src` attribute via `HeroImg.src`.
+</Note>
+
+## Responsive Column Behavior
+
+<Tabs>
+  <Tab title="Mobile (xs)">
+    ```html
+    col-12
+    ```
+    Both columns stack vertically at 100% width. The hero image is hidden with `d-none d-md-block`.
+  </Tab>
+  <Tab title="Tablet (md)">
+    ```html
+    col-md-6
+    ```
+    Columns split 50/50. Hero image becomes visible.
+  </Tab>
+  <Tab title="Desktop (lg+)">
+    ```html
+    col-lg-6
+    ```
+    Maintains 50/50 split with additional spacing from `px-lg-5` and `py-lg-5`.
+  </Tab>
+</Tabs>
+
+## Brand Button Styling
+
+The call-to-action button uses a custom `.btn-brand` class:
+
+```html
+<button class="btn btn-brand px-5 py-2 rounded-pill">Reservar ahora</button>
+```
+
+### Custom CSS
+
+```css
+.btn-brand {
+  background-color: var(--color-brand-green-800);
+  color: var(--color-neutral-white-900);
+  border: none;
+}
+.btn-brand:hover {
+  background-color: var(--color-brand-green-700);
+  color: var(--color-neutral-white-900);
+}
+.btn-brand:active {
+  background-color: var(--color-brand-green-600);
+  color: var(--color-neutral-white-900);
+}
+```
+
+<Info>
+  The button uses CSS custom properties for consistent color theming across the site.
+</Info>
+
+## Button Classes Breakdown
+
+| Class | Purpose |
+|-------|--------|
+| `btn` | Bootstrap base button styles |
+| `btn-brand` | Custom green brand color |
+| `px-5` | Horizontal padding (3rem) |
+| `py-2` | Vertical padding (0.5rem) |
+| `rounded-pill` | Fully rounded corners |
+
+## Hero Image Positioning
+
+The hero image uses absolute positioning to create a dramatic layout:
+
+```html
+<img 
+  src={HeroImg.src} 
+  class="img-fluid hero-img position-absolute bottom-0 end-0 pe-5" 
+  alt="Hero Image"
+>
+```
+
+```css
+.hero-img {
+  max-width: 600px;
+  height: auto;
+}
+```
+
+<Tip>
+  The combination of `position-absolute bottom-0 end-0` anchors the image to the bottom-right corner, creating visual interest.
+</Tip>
+
+## Typography Styles
+
+Custom typography enhances the hero section's visual hierarchy:
+
+```css
+h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--color-neutral-black-900);
+}
+p {
+  font-size: 18px;
+  color: var(--color-neutral-gray-900);
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+```
+
+## Spacing and Padding
+
+The hero section uses responsive spacing utilities:
+
+- **Container**: `px-3 px-lg-5` - Horizontal padding increases on large screens
+- **Vertical**: `py-md-5 py-lg-5` - Padding applied on medium and large screens
+- **Margin**: `my-5` - Vertical margin for separation
+- **Bottom padding**: `pb-5` - Extra bottom padding on mobile
+
+<Note>
+  The `position-relative` class on the header allows absolute positioning of child elements like the hero image.
+</Note>

@@ -1,0 +1,114 @@
+---
+title: Installation
+description: Learn how to install and set up the ZOODOM project
+---
+
+# Installation
+
+This guide will walk you through installing and setting up the ZOODOM project on your local machine.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+<Note>
+  **Node.js 22.12.0 or higher** is required to run this project.
+</Note>
+
+You can verify your Node.js version by running:
+
+```bash
+node --version
+```
+
+If you need to install or update Node.js, visit [nodejs.org](https://nodejs.org/).
+
+## Installation Steps
+
+<Steps>
+  <Step title="Clone the repository">
+    First, clone the ZOODOM repository to your local machine:
+    
+    ```bash
+    git clone <repository-url>
+    cd zoodom
+    ```
+  </Step>
+
+  <Step title="Install dependencies">
+    Install the project dependencies using your preferred package manager:
+    
+    <CodeGroup>
+      ```bash npm
+      npm install
+      ```
+      
+      ```bash yarn
+      yarn install
+      ```
+      
+      ```bash pnpm
+      pnpm install
+      ```
+    </CodeGroup>
+    
+    This will install all required dependencies defined in `package.json`.
+  </Step>
+
+  <Step title="Verify installation">
+    Verify that the installation was successful by checking the installed packages:
+    
+    ```bash
+    npm list --depth=0
+    ```
+    
+    You should see Astro listed as a dependency.
+  </Step>
+</Steps>
+
+## Dependencies
+
+The ZOODOM project has minimal dependencies, keeping the project lightweight and fast:
+
+```json package.json
+{
+  "name": "zoodom",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "astro": "^6.0.4"
+  }
+}
+```
+
+<Info>
+  Bootstrap 5.3.8 is loaded via CDN in the Layout component, so it's not included as an npm dependency.
+</Info>
+
+## External Resources
+
+The project uses the following external resources loaded via CDN:
+
+- **Bootstrap CSS** - Version 5.3.8
+- **Bootstrap JavaScript** - Version 5.3.8
+- **Popper.js** - Version 2.11.8 (for Bootstrap tooltips and popovers)
+- **Google Fonts** - Onest font family
+
+These are automatically loaded when you run the development server, so no additional setup is required.
+
+## Troubleshooting
+
+<Warning>
+  If you encounter a Node.js version error, make sure you're using Node.js 22.12.0 or higher. Consider using [nvm](https://github.com/nvm-sh/nvm) to manage multiple Node.js versions.
+</Warning>
+
+<Tip>
+  If installation fails, try deleting `node_modules` and `package-lock.json`, then run the install command again.
+</Tip>
+
+## Next Steps
+
+Once installation is complete, proceed to the [Quickstart Guide](/quickstart) to learn how to run the development server and build your project.

@@ -1,0 +1,133 @@
+---
+title: "Head Component"
+description: "SEO and metadata management component for ZOODOM pages"
+---
+
+The `Head.astro` component manages all SEO metadata, Open Graph tags, and essential document head elements for ZOODOM pages.
+
+## Props Interface
+
+The component accepts the following optional props:
+
+<ParamField path="title" type="string" default="ZOODOM - Parque Zoológico Nacional">
+  The page title displayed in the browser tab and search results
+</ParamField>
+
+<ParamField path="description" type="string" default="ZOODOM - Parque Zoológico Nacional. Descubre la fauna y flora en nuestro zoológico.">
+  Meta description for SEO and social sharing
+</ParamField>
+
+<ParamField path="canonicalUrl" type="string" default="https://zoodomi.netlify.app">
+  The canonical URL for the page to prevent duplicate content issues
+</ParamField>
+
+<ParamField path="image" type="string" default="/cover.png">
+  Social sharing image path (relative to canonicalUrl)
+</ParamField>
+
+## Features
+
+### SEO Meta Tags
+
+The component includes essential SEO meta tags:
+
+- **charset**: UTF-8 encoding
+- **viewport**: Responsive viewport configuration
+- **description**: Page description from props
+- **keywords**: "zoo, zoológico, animales, naturaleza, parque, rd"
+- **author**: "Ronald Santana"
+
+### Open Graph Tags
+
+Full Open Graph support for social media sharing:
+
+- `og:type`: website
+- `og:locale`: es_DO (Spanish - Dominican Republic)
+- `og:site_name`: ZOODOM
+- `og:url`, `og:title`, `og:description`: From props
+- `og:image`: Full URL with dimensions (1200x630)
+- `og:image:type`: image/png
+
+### Fonts and Styles
+
+- Google Fonts: Onest font family (weights 100-900)
+- Global CSS: `../assets/global.css`
+- Main CSS: `/src/assets/main.css`
+
+## Component Code
+
+```astro
+---
+import '../assets/global.css';
+interface Props {
+    title?: string;
+    description?: string;
+    canonicalUrl?: string;
+    image?: string;
+}
+
+const {
+    title = 'ZOODOM - Parque Zoológico Nacional',
+    description = 'ZOODOM - Parque Zoológico Nacional. Descubre la fauna y flora en nuestro zoológico.',
+    canonicalUrl = 'https://zoodomi.netlify.app',
+    image = '/cover.png',
+} = Astro.props;
+
+const socialImageUrl = new URL(image, canonicalUrl).href;
+---
+
+<!-- Meta generales -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content={description} />
+<meta name="keywords" content="zoo, zoológico, animales, naturaleza, parque, rd" />
+<meta name="author" content="Ronald Santana" />
+<!-- Titulo -->
+<title>{title}</title>
+<!-- CSS -->
+<link rel="stylesheet" href="/src/assets/main.css" />
+<!-- Fuentes -->
+<link rel="canonical" href={canonicalUrl} />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+<!-- Meta de Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_DO" />
+<meta property="og:site_name" content="ZOODOM" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageUrl} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Portada de ZOODOM - Parque Zoológico Nacional" />
+```
+
+## Usage in Pages
+
+The Head component is automatically included in the Layout component, so you typically don't use it directly. However, you can customize it by passing props to Layout:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Your page content -->
+</Layout>
+```
+
+<Note>
+The Head component automatically generates the social image URL by combining the `canonicalUrl` and `image` props using `new URL(image, canonicalUrl).href`.
+</Note>
+
+## Default Values
+
+All props have sensible defaults for the ZOODOM website:
+
+- Default title includes the zoo's full name
+- Description emphasizes discovering fauna and flora
+- Canonical URL points to the production site
+- Default cover image at `/cover.png`

@@ -1,0 +1,225 @@
+---
+title: 'Configuration'
+description: 'Configuration files and settings for the ZOODOM project'
+---
+
+## Overview
+
+ZOODOM uses standard Astro configuration files to manage project settings, dependencies, and build behavior.
+
+## Astro Configuration
+
+The main configuration file is `astro.config.mjs`, located at the project root.
+
+### Current Configuration
+
+```javascript
+// astro.config.mjs
+// @ts-check
+import { defineConfig } from 'astro/config';
+
+// https://astro.build/config
+export default defineConfig({
+    site: 'https://zoodomi.netlify.app',
+});
+```
+
+### Site Setting
+
+The `site` setting defines the production URL of your deployed site:
+
+```javascript
+site: 'https://zoodomi.netlify.app'
+```
+
+This setting is used for:
+- Generating canonical URLs
+- Creating sitemaps
+- Building absolute URLs for social media meta tags
+- RSS feeds (if configured)
+
+### Changing the Site URL
+
+To deploy to a different domain, update the `site` value:
+
+<CodeGroup>
+
+```javascript Custom Domain
+export default defineConfig({
+    site: 'https://www.yourdomain.com',
+});
+```
+
+```javascript Local Development
+export default defineConfig({
+    site: 'http://localhost:4321',
+});
+```
+
+```javascript Subdomain
+export default defineConfig({
+    site: 'https://zoo.yourdomain.com',
+});
+```
+
+</CodeGroup>
+
+<Warning>
+  Always update this value when deploying to a new domain to ensure URLs are generated correctly.
+</Warning>
+
+## Package Configuration
+
+The `package.json` file defines project metadata, dependencies, and npm scripts.
+
+### Full Configuration
+
+```json
+{
+  "name": "zoodom",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^6.0.4"
+  }
+}
+```
+
+### Node.js Version
+
+The project requires Node.js version **22.12.0 or higher**:
+
+```json
+"engines": {
+  "node": ">=22.12.0"
+}
+```
+
+<Note>
+  This requirement ensures compatibility with Astro 6.0.4 and modern JavaScript features.
+</Note>
+
+### NPM Scripts
+
+The project includes the following npm scripts:
+
+#### Development Server
+
+Start the local development server with hot module replacement:
+
+```bash
+npm run dev
+```
+
+This runs `astro dev` and starts the server at `http://localhost:4321`.
+
+#### Production Build
+
+Build the site for production deployment:
+
+```bash
+npm run build
+```
+
+This runs `astro build` and outputs static files to the `dist/` directory.
+
+#### Preview Build
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+This serves the `dist/` directory to test the production build before deployment.
+
+#### Astro CLI
+
+Access the Astro CLI directly:
+
+```bash
+npm run astro
+```
+
+Use this for running Astro commands like `astro add`, `astro check`, etc.
+
+## Dependencies
+
+### Astro Framework
+
+The project uses Astro version **6.0.4**:
+
+```json
+"dependencies": {
+  "astro": "^6.0.4"
+}
+```
+
+The `^` symbol means npm will install version 6.0.4 or any compatible newer version (6.x.x).
+
+<Info>
+  ZOODOM uses Astro for static site generation, providing excellent performance and SEO out of the box.
+</Info>
+
+### Additional Dependencies
+
+The project uses Bootstrap via CDN (included in templates) and does not require additional npm packages.
+
+## Environment Variables
+
+For local development or deployment-specific configuration, create a `.env` file:
+
+```bash
+# .env (not tracked in git)
+PUBLIC_SITE_URL=https://zoodomi.netlify.app
+```
+
+<Warning>
+  Never commit `.env` files containing sensitive information. Use your hosting platform's environment variable settings instead.
+</Warning>
+
+## TypeScript Configuration
+
+Astro includes built-in TypeScript support. The project uses:
+
+- Type checking enabled via `// @ts-check` in config files
+- Astro's default TypeScript configuration
+- Type safety for component props
+
+To add a custom `tsconfig.json`:
+
+```json
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```
+
+## Build Output
+
+When you run `npm run build`, Astro generates static files in the `dist/` directory:
+
+```
+dist/
+├── index.html          # Homepage
+├── _astro/            # Compiled assets
+│   ├── *.css
+│   └── *.js
+├── assets/            # Images and media
+└── [other pages].html
+```
+
+<Note>
+  The `dist/` directory is the publish directory for Netlify deployment.
+</Note>

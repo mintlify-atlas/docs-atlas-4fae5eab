@@ -1,0 +1,204 @@
+---
+title: "Navbar Component"
+description: "Responsive Bootstrap navbar for ZOODOM navigation"
+---
+
+The navbar in ZOODOM is implemented directly in `index.astro` using Bootstrap 5's navbar component. It provides responsive navigation with a collapsible menu for mobile devices.
+
+## Navbar Structure
+
+The navbar uses Bootstrap's `.navbar-expand-lg` class to collapse on screens smaller than large breakpoints.
+
+```astro
+<nav class="navbar navbar-expand-lg navbar-light">
+  <section class="container px-3 px-lg-5 py-3">
+    <a class="navbar-brand me-0" href="#">
+      <!-- Logo images -->
+    </a>
+    <button class="navbar-toggler border-0" type="button">
+      <!-- Toggler icon -->
+    </button>
+    <section class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Navigation items -->
+    </section>
+  </section>
+</nav>
+```
+
+## Complete Navbar Code
+
+```astro
+<nav class="navbar navbar-expand-lg navbar-light">
+  <section class="container px-3 px-lg-5 py-3">
+    <a class="navbar-brand me-0" href="#">
+      <!-- Móvil -->
+      <img
+        src={logo.src}
+        class="img-fluid d-inline d-sm-none"
+        width="80"
+        alt="Logo"
+      />
+      <!-- Tablet/Desktop -->
+      <img
+        src={logo.src}
+        class="img-fluid d-none d-sm-inline"
+        width="110"
+        alt="Logo"
+      />
+    </a>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <section class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0 gap-lg-4 pt-3 pt-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Especies</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Galeria</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+      </ul>
+    </section>
+  </section>
+</nav>
+```
+
+## Navbar Brand (Logo)
+
+The navbar brand contains responsive logo images:
+
+### Mobile Logo
+- **Display**: Shown only on mobile (< 576px)
+- **Classes**: `d-inline d-sm-none`
+- **Width**: 80px
+- **Source**: Imported from `../assets/logo.svg`
+
+### Tablet/Desktop Logo
+- **Display**: Hidden on mobile, shown on tablets and up (≥ 576px)
+- **Classes**: `d-none d-sm-inline`
+- **Width**: 110px
+- **Source**: Same logo file
+
+<Tip>
+The navbar brand uses `me-0` to remove right margin, allowing custom spacing control.
+</Tip>
+
+## Navbar Toggler
+
+The mobile menu toggle button:
+
+```astro
+<button
+  class="navbar-toggler border-0"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#mainNavbar"
+  aria-controls="mainNavbar"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+>
+  <span class="navbar-toggler-icon"></span>
+</button>
+```
+
+### Key Features
+
+- **`border-0`**: Removes default Bootstrap border
+- **`data-bs-toggle="collapse"`**: Enables Bootstrap collapse functionality
+- **`data-bs-target="#mainNavbar"`**: Targets the collapsible navigation section
+- **ARIA attributes**: Proper accessibility labels
+
+## Navbar Collapse Section
+
+The collapsible navigation menu:
+
+```astro
+<section class="collapse navbar-collapse" id="mainNavbar">
+  <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0 gap-lg-4 pt-3 pt-lg-0">
+    <!-- Nav items -->
+  </ul>
+</section>
+```
+
+### Nav List Classes
+
+- **`ms-lg-auto`**: Pushes navigation to the right on large screens
+- **`mb-2 mb-lg-0`**: Bottom margin on mobile, none on large screens
+- **`gap-lg-4`**: Adds spacing between items on large screens
+- **`pt-3 pt-lg-0`**: Top padding on mobile, none on large screens
+
+## Navigation Items
+
+Five main navigation links:
+
+<ParamField path="Inicio" type="nav-link">
+  Home page link - marked as active with `class="nav-link active"` and `aria-current="page"`
+</ParamField>
+
+<ParamField path="Especies" type="nav-link">
+  Species page link
+</ParamField>
+
+<ParamField path="Galeria" type="nav-link">
+  Gallery page link
+</ParamField>
+
+<ParamField path="Blog" type="nav-link">
+  Blog page link
+</ParamField>
+
+<ParamField path="Contacto" type="nav-link">
+  Contact page link
+</ParamField>
+
+## Bootstrap Classes Used
+
+### Navbar Classes
+
+- **`navbar`**: Base navbar component
+- **`navbar-expand-lg`**: Expands navbar on large screens (≥992px)
+- **`navbar-light`**: Light color scheme for navbar
+
+### Container Classes
+
+- **`container`**: Bootstrap responsive container
+- **`px-3 px-lg-5`**: Horizontal padding (3 on mobile, 5 on large screens)
+- **`py-3`**: Vertical padding of 3
+
+### Display Utilities
+
+- **`d-inline`**: Display inline
+- **`d-sm-none`**: Hide on small screens and up
+- **`d-none`**: Hide element
+- **`d-sm-inline`**: Display inline on small screens and up
+
+### Image Class
+
+- **`img-fluid`**: Makes images responsive (max-width: 100%)
+
+<Note>
+The navbar uses `<section>` elements instead of the typical `<div>` for semantic HTML structure.
+</Note>
+
+## Responsive Behavior
+
+### Mobile (< 992px)
+- Smaller logo (80px)
+- Collapsed menu behind hamburger button
+- Vertical navigation items with padding
+- Full-width stacked links
+
+### Desktop (≥ 992px)
+- Larger logo (110px)
+- Horizontal navigation
+- Navigation aligned to the right
+- Spaced items with `gap-lg-4`

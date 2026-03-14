@@ -1,0 +1,144 @@
+---
+title: "Navigation"
+description: "Learn how ZOODOM implements a responsive Bootstrap navbar with mobile and desktop variations"
+---
+
+# Navigation
+
+ZOODOM uses Bootstrap's navbar component to create a responsive navigation system that adapts seamlessly between mobile and desktop viewports.
+
+## Bootstrap Navbar Structure
+
+The navigation is built using Bootstrap 5's `navbar-expand-lg` class, which collapses the menu on screens smaller than large breakpoints:
+
+```astro
+<nav class="navbar navbar-expand-lg navbar-light">
+  <section class="container px-3 px-lg-5 py-3">
+    <a class="navbar-brand me-0" href="#">
+      <!-- Logo content -->
+    </a>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <section class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0 gap-lg-4 pt-3 pt-lg-0">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Especies</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Galeria</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+      </ul>
+    </section>
+  </section>
+</nav>
+```
+
+## Responsive Logo Sizing
+
+The navbar displays different logo sizes based on viewport width using Bootstrap's responsive display utilities:
+
+```astro
+<!-- Mobile -->
+<img
+  src={logo.src}
+  class="img-fluid d-inline d-sm-none"
+  width="80"
+  alt="Logo"
+/>
+<!-- Tablet/Desktop -->
+<img
+  src={logo.src}
+  class="img-fluid d-none d-sm-inline"
+  width="110"
+  alt="Logo"
+/>
+```
+
+<Tabs>
+  <Tab title="Mobile">
+    - Logo width: `80px`
+    - Classes: `d-inline d-sm-none` (visible only on extra small screens)
+  </Tab>
+  <Tab title="Tablet/Desktop">
+    - Logo width: `110px`
+    - Classes: `d-none d-sm-inline` (hidden on small screens, visible on sm and above)
+  </Tab>
+</Tabs>
+
+## Mobile Menu Toggle
+
+The hamburger menu button uses Bootstrap's collapse JavaScript plugin:
+
+```html
+<button
+  class="navbar-toggler border-0"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#mainNavbar"
+  aria-controls="mainNavbar"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+>
+  <span class="navbar-toggler-icon"></span>
+</button>
+```
+
+<Info>
+  The `data-bs-toggle="collapse"` and `data-bs-target="#mainNavbar"` attributes connect the button to the collapsible menu section.
+</Info>
+
+## Key Bootstrap Classes
+
+| Class | Purpose |
+|-------|--------|
+| `navbar-expand-lg` | Expands navbar on large screens and above |
+| `navbar-light` | Light color scheme for navbar |
+| `navbar-toggler` | Styles the hamburger menu button |
+| `navbar-collapse` | Collapsible container for navigation items |
+| `navbar-nav` | Flexbox list container for nav items |
+| `ms-lg-auto` | Pushes nav items to the right on large screens |
+| `gap-lg-4` | Adds spacing between nav items on large screens |
+
+## Active State Styling
+
+Active navigation items are styled using custom CSS:
+
+```css
+a.active {
+  color: var(--color-brand-green-800) !important;
+  font-weight: 600;
+}
+```
+
+<Tip>
+  The navbar uses `container px-3 px-lg-5` for responsive horizontal padding that increases on larger screens.
+</Tip>
+
+## Desktop vs Mobile Behavior
+
+<Tabs>
+  <Tab title="Desktop (≥992px)">
+    - Navigation items display horizontally
+    - Menu is always visible
+    - Larger logo (110px)
+    - Items have `gap-lg-4` spacing
+    - Aligned to the right with `ms-lg-auto`
+  </Tab>
+  <Tab title="Mobile (<992px)">
+    - Hamburger menu button appears
+    - Navigation collapses into dropdown
+    - Smaller logo (80px on xs, 110px on sm)
+    - Vertical menu layout
+    - Full-width menu items
+  </Tab>
+</Tabs>

@@ -1,0 +1,229 @@
+---
+title: "Color System"
+description: "Comprehensive color palette and CSS variables for ZOODOM"
+---
+
+ZOODOM uses a comprehensive color system built with CSS custom properties (variables) defined in `global.css`. The palette includes brand greens, accent greens, extended colors, and neutral tones.
+
+## CSS Variables Overview
+
+All colors are defined as CSS variables in the `:root` selector, making them globally accessible throughout the application.
+
+```css
+:root {
+    /* CSS variables defined here */
+}
+```
+
+To use any color in your styles:
+
+```css
+.my-element {
+    background-color: var(--color-brand-green-800);
+    color: var(--color-neutral-white-900);
+}
+```
+
+## Brand Green Palette
+
+The primary brand color palette ranges from dark green (900) to very light green (50).
+
+<CardGroup cols={2}>
+  <Card title="Brand Green 900" icon="square">
+    `--color-brand-green-900: #144A1F`
+    
+    Darkest brand green
+  </Card>
+  <Card title="Brand Green 800" icon="square">
+    `--color-brand-green-800: #246C32`
+    
+    Primary brand color (used in buttons)
+  </Card>
+  <Card title="Brand Green 700" icon="square">
+    `--color-brand-green-700: #388E49`
+    
+    Button hover state
+  </Card>
+  <Card title="Brand Green 600" icon="square">
+    `--color-brand-green-600: #51B063`
+    
+    Button active state
+  </Card>
+</CardGroup>
+
+<CardGroup cols={3}>
+  <Card title="Brand Green 500" icon="square">
+    `--color-brand-green-500: #6DD281`
+  </Card>
+  <Card title="Brand Green 400" icon="square">
+    `--color-brand-green-400: #8EF4A2`
+  </Card>
+  <Card title="Brand Green 300" icon="square">
+    `--color-brand-green-300: #ACFFBC`
+  </Card>
+  <Card title="Brand Green 200" icon="square">
+    `--color-brand-green-200: #C4FFD0`
+  </Card>
+  <Card title="Brand Green 100" icon="square">
+    `--color-brand-green-100: #DCFFE3`
+  </Card>
+  <Card title="Brand Green 50" icon="square">
+    `--color-brand-green-50: #F4FFF6`
+    
+    Lightest brand green
+  </Card>
+</CardGroup>
+
+### Complete Brand Green Variables
+
+```css
+/* Green */
+--color-brand-green-900: #144A1F;
+--color-brand-green-800: #246C32;
+--color-brand-green-700: #388E49;
+--color-brand-green-600: #51B063;
+--color-brand-green-500: #6DD281;
+--color-brand-green-400: #8EF4A2;
+--color-brand-green-300: #ACFFBC;
+--color-brand-green-200: #C4FFD0;
+--color-brand-green-100: #DCFFE3;
+--color-brand-green-50: #F4FFF6;
+```
+
+## Accent Green Palette
+
+A secondary green palette with yellowish tones for accent elements.
+
+```css
+/* Accent */
+--color-accent-green-900: #2E4F19;
+--color-accent-green-800: #416C26;
+--color-accent-green-700: #558936;
+--color-accent-green-600: #6BA747;
+--color-accent-green-500: #82C45A;
+--color-accent-green-400: #9AE16F;
+--color-accent-green-300: #B3FE87;
+--color-accent-green-200: #CAFFAB;
+--color-accent-green-100: #E1FFCF;
+--color-accent-green-50: #F7FFF3;
+```
+
+<Info>
+The accent green palette provides a complementary color range for variety while maintaining brand consistency.
+</Info>
+
+## Extended Colors
+
+Additional colors for various UI states and elements.
+
+### Blue
+
+```css
+/* Blue */
+--color-extended-blue-900: #113E4D;
+--color-extended-blue-500: #6BD8FC;
+--color-extended-blue-100: #C4F0FF;
+```
+
+### Yellow
+
+```css
+/* Yellow */
+--color-extended-yellow-900: #5C4100;
+--color-extended-yellow-500: #FFB401;
+--color-extended-yellow-100: #FFEAB8;
+```
+
+### Orange
+
+```css
+/* Orange */
+--color-extended-orange-900: #5B3700;
+--color-extended-orange-500: #FE9900;
+--color-extended-orange-100: #FFE2B7;
+```
+
+### Red
+
+```css
+/* Red */
+--color-extended-red-900: #5C0600;
+--color-extended-red-500: #FF2414;
+--color-extended-red-100: #FFC1BD;
+```
+
+<Tip>
+Extended colors are useful for alerts, warnings, informational messages, and decorative elements.
+</Tip>
+
+## Neutral Colors
+
+### Gray Scale
+
+A complete grayscale palette from black to white.
+
+```css
+/* Black */
+--color-neutral-black-900: #222222;
+/* Gray */
+--color-neutral-gray-900: #4B4B4B;
+--color-neutral-gray-800: #5F5F5F; 
+--color-neutral-gray-700: #747474;
+--color-neutral-gray-600: #888888;
+--color-neutral-gray-500: #9C9C9C;
+--color-neutral-gray-400: #B1B1B1;
+--color-neutral-gray-300: #C5C5C5;
+--color-neutral-gray-200: #DADADA;
+--color-neutral-gray-100: #EEEEEE;
+--color-neutral-gray-50: #FFFFFF;
+```
+
+### White and Overlay
+
+```css
+/* White */
+--color-neutral-white-900: #FFFFFF;
+/* Black overlay */
+--color-neutral-overlay-900: #00000077;
+```
+
+<Note>
+The overlay color (`#00000077`) has 77 transparency for semi-transparent backgrounds.
+</Note>
+
+## Usage Examples
+
+### In Custom CSS
+
+```css
+.custom-button {
+    background-color: var(--color-brand-green-800);
+    color: var(--color-neutral-white-900);
+}
+
+.custom-button:hover {
+    background-color: var(--color-brand-green-700);
+}
+```
+
+### In Astro Components
+
+```html
+<div style={`background-color: var(--color-brand-green-50); color: var(--color-neutral-black-900);`}>
+    Content with brand colors
+</div>
+```
+
+### Text Color Utility
+
+The `.text-primary` class applies the brand green color:
+
+```css
+.text-primary {
+    color: var(--color-brand-green-800);
+}
+```
+
+```html
+<p class="text-primary">This text is brand green</p>
+```

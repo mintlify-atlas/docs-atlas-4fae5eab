@@ -1,0 +1,146 @@
+---
+title: "Layout Component"
+description: "Main layout wrapper with Bootstrap integration for ZOODOM"
+---
+
+The `Layout.astro` component serves as the main wrapper for all ZOODOM pages, providing the HTML document structure, Bootstrap CDN integration, and the Head component.
+
+## Overview
+
+Layout is the foundation component that:
+
+- Includes the Head component for SEO and metadata
+- Loads Bootstrap 5.3.8 CSS and JavaScript from CDN
+- Provides the HTML document structure
+- Uses Astro's slot system for page content
+
+## Component Structure
+
+```astro
+---
+import Head from "../components/Head.astro";
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<Head />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+			crossorigin="anonymous"
+		/>
+	</head>
+	<body>
+		<slot />
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+			integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+			crossorigin="anonymous"></script>
+	</body>
+</html>
+```
+
+## Head Component Integration
+
+The Layout imports and renders the Head component, which handles all SEO metadata, Open Graph tags, fonts, and stylesheets. See the [Head Component](/components/head) documentation for details.
+
+## Bootstrap CDN Links
+
+### CSS (in `<head>`)
+
+Bootstrap 5.3.8 CSS is loaded from jsDelivr CDN with SRI (Subresource Integrity) for security:
+
+```html
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+  crossorigin="anonymous"
+/>
+```
+
+### JavaScript (before `</body>`)
+
+Three Bootstrap-related scripts are loaded at the end of the body:
+
+1. **Popper.js** (v2.11.8): Required for tooltips and popovers
+2. **Bootstrap JS**: Core Bootstrap JavaScript
+3. **Bootstrap Bundle**: Includes both Bootstrap and Popper in one file
+
+<Info>
+All three scripts include integrity hashes and CORS configuration for security.
+</Info>
+
+## Slot System
+
+The Layout uses Astro's `<slot />` to inject page content:
+
+```astro
+<body>
+  <slot />
+  <!-- Scripts -->
+</body>
+```
+
+Any content passed between `<Layout>` tags in a page will be rendered in place of `<slot />`.
+
+## Usage in Pages
+
+Wrap your page content with the Layout component:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <main>
+    <h1>Your page content</h1>
+    <!-- Your components and content here -->
+  </main>
+</Layout>
+```
+
+### Example from index.astro
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import logo from'../assets/logo.svg';
+---
+
+<Layout>
+  <main>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <!-- Navbar content -->
+    </nav>
+    <header>
+      <!-- Header content -->
+    </header>
+  </main>
+</Layout>
+```
+
+## Document Language
+
+The HTML document is configured for Spanish:
+
+```html
+<html lang="es">
+```
+
+This matches the Open Graph locale setting (`es_DO`) in the Head component.
+
+<Note>
+The Layout component loads scripts at the end of the body for better page load performance. Content is rendered before JavaScript executes.
+</Note>

@@ -1,0 +1,324 @@
+---
+title: "Bootstrap Integration"
+description: "How ZOODOM integrates Bootstrap 5 with custom styles"
+---
+
+ZOODOM uses Bootstrap 5.3.8 via CDN for responsive grid, navigation, and components, combined with custom CSS variables and styles.
+
+## Bootstrap CDN Setup
+
+Bootstrap is loaded through CDN links in `Layout.astro` for optimal performance.
+
+### CSS Link
+
+```html
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+/>
+```
+
+### JavaScript Links
+
+Bootstrap requires Popper.js for components like dropdowns and tooltips:
+
+```html
+<!-- Popper.js (required for Bootstrap) -->
+<script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+
+<!-- Bootstrap Bundle (includes Popper) -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+```
+
+<Note>
+The integrity attributes provide subresource integrity (SRI) checking for security.
+</Note>
+
+## Bootstrap Components Used
+
+### Navbar Component
+
+The site uses Bootstrap's responsive navbar with custom brand colors.
+
+```html
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <!-- Navbar content -->
+        <button class="navbar-toggler" type="button">
+            <!-- Toggler icon -->
+        </button>
+    </div>
+</nav>
+```
+
+#### Navbar Toggler Customization
+
+The mobile menu toggle button uses the brand green color:
+
+```css
+.navbar-toggler {
+    border-color: var(--color-brand-green-800);
+}
+```
+
+### Grid System
+
+Bootstrap's 12-column responsive grid is used throughout the site:
+
+```html
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Content -->
+        </div>
+        <div class="col-md-6">
+            <!-- Content -->
+        </div>
+    </div>
+</div>
+```
+
+<Tip>
+Use Bootstrap grid classes like `col-12`, `col-md-6`, `col-lg-4` for responsive layouts.
+</Tip>
+
+## Custom Button Styles
+
+### .btn-brand Class
+
+While Bootstrap provides button styles, ZOODOM defines a custom `.btn-brand` class with the brand green color:
+
+```css
+.btn-brand {
+    background-color: var(--color-brand-green-800);
+    color: var(--color-neutral-white-900);
+    border: none;
+}
+
+.btn-brand:hover {
+    background-color: var(--color-brand-green-700);
+    color: var(--color-neutral-white-900);
+}
+
+.btn-brand:active {
+    background-color: var(--color-brand-green-600);
+    color: var(--color-neutral-white-900);
+}
+```
+
+<CardGroup cols={3}>
+  <Card title="Default State" icon="circle">
+    `--color-brand-green-800` (#246C32)
+  </Card>
+  <Card title="Hover State" icon="hand-pointer">
+    `--color-brand-green-700` (#388E49)
+  </Card>
+  <Card title="Active State" icon="circle-check">
+    `--color-brand-green-600` (#51B063)
+  </Card>
+</CardGroup>
+
+### Usage with Bootstrap Button Classes
+
+Combine `.btn-brand` with Bootstrap's button utilities:
+
+```html
+<!-- Standard button -->
+<button class="btn btn-brand">Learn More</button>
+
+<!-- Large button -->
+<button class="btn btn-brand btn-lg">Get Started</button>
+
+<!-- Small button -->
+<button class="btn btn-brand btn-sm">Details</button>
+
+<!-- Block button (full width) -->
+<button class="btn btn-brand w-100">Visit Zoo</button>
+```
+
+<Info>
+The `.btn-brand` class can be combined with any Bootstrap button utility class.
+</Info>
+
+## Responsive Utilities
+
+Bootstrap's responsive display utilities control element visibility:
+
+### Common Display Classes
+
+```html
+<!-- Hide on mobile, show on medium and up -->
+<div class="d-none d-md-block">
+    Desktop content
+</div>
+
+<!-- Show on mobile, hide on medium and up -->
+<div class="d-block d-md-none">
+    Mobile content
+</div>
+
+<!-- Hide on mobile, show inline on large screens -->
+<span class="d-none d-lg-inline">
+    Large screen text
+</span>
+```
+
+### Breakpoint Reference
+
+<CardGroup cols={2}>
+  <Card title="Extra Small (xs)" icon="mobile">
+    `< 576px` - Default (no class prefix)
+  </Card>
+  <Card title="Small (sm)" icon="mobile-screen">
+    `>= 576px` - Use `.d-sm-*` classes
+  </Card>
+  <Card title="Medium (md)" icon="tablet">
+    `>= 768px` - Use `.d-md-*` classes
+  </Card>
+  <Card title="Large (lg)" icon="laptop">
+    `>= 992px` - Use `.d-lg-*` classes
+  </Card>
+  <Card title="Extra Large (xl)" icon="desktop">
+    `>= 1200px` - Use `.d-xl-*` classes
+  </Card>
+  <Card title="XXL (xxl)" icon="tv">
+    `>= 1400px` - Use `.d-xxl-*` classes
+  </Card>
+</CardGroup>
+
+## Custom CSS with Bootstrap
+
+### Text Color Override
+
+Custom `.text-primary` class overrides Bootstrap's default:
+
+```css
+.text-primary {
+    color: var(--color-brand-green-800);
+}
+```
+
+<Note>
+This ensures `.text-primary` uses ZOODOM's brand green instead of Bootstrap's blue.
+</Note>
+
+### Active Link Styling
+
+Navigations links receive custom active state styling:
+
+```css
+a.active {
+    color: var(--color-brand-green-800) !important;
+    font-weight: 600;
+}
+```
+
+## Image Utilities
+
+### Logo Sizing
+
+```css
+.logo {
+    width: 110px;
+    height: auto;
+}
+```
+
+### Hero Image
+
+```css
+.hero-img {
+    max-width: 600px;
+    height: auto;
+}
+```
+
+Use with Bootstrap's responsive utilities:
+
+```html
+<img src="logo.svg" class="logo img-fluid" alt="ZOODOM">
+<img src="hero.jpg" class="hero-img img-fluid" alt="Zoo">
+```
+
+<Tip>
+Combine custom sizing classes with Bootstrap's `.img-fluid` for responsive images.
+</Tip>
+
+## Background Section
+
+### Textured Background
+
+The animals section uses a textured background with fixed attachment:
+
+```css
+#animals {
+    background-image: url('./texture-img.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+```
+
+```html
+<section id="animals" class="py-5">
+    <!-- Bootstrap padding utility with custom background -->
+</section>
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use Bootstrap for Layout" icon="grid">
+    Leverage Bootstrap's grid system and spacing utilities for responsive layouts.
+  </Card>
+  <Card title="Custom Colors via Variables" icon="palette">
+    Define brand colors as CSS variables, then reference them in custom classes.
+  </Card>
+  <Card title="Extend, Don't Override" icon="plus">
+    Create custom classes like `.btn-brand` instead of overriding Bootstrap defaults.
+  </Card>
+  <Card title="Combine Classes" icon="layer-group">
+    Mix Bootstrap utilities with custom classes for maximum flexibility.
+  </Card>
+</CardGroup>
+
+## Complete Integration Example
+
+```html
+<section class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1>Welcome to ZOODOM</h1>
+            <p class="text-primary">Discover amazing wildlife</p>
+            <button class="btn btn-brand btn-lg">Visit Now</button>
+        </div>
+        <div class="col-md-6 d-none d-md-block">
+            <img src="hero.jpg" class="hero-img img-fluid" alt="Hero">
+        </div>
+    </div>
+</section>
+```
+
+This example combines:
+- Bootstrap grid (`container`, `row`, `col-md-6`)
+- Bootstrap spacing (`py-5`)
+- Bootstrap alignment (`align-items-center`)
+- Bootstrap display utilities (`d-none d-md-block`)
+- Bootstrap button size (`btn-lg`)
+- Custom classes (`btn-brand`, `text-primary`, `hero-img`)
+- Custom typography (`h1`, `p`)

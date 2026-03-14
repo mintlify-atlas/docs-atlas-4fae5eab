@@ -1,0 +1,221 @@
+---
+title: "Typography"
+description: "Font family, headings, and text styles in ZOODOM"
+---
+
+ZOODOM uses the **Onest** font family from Google Fonts, providing a modern and clean typographic system.
+
+## Font Family
+
+### Onest Font
+
+The Onest font is a variable font supporting weights from 100 to 900, loaded from Google Fonts.
+
+<Info>
+Onest is applied globally to all HTML elements through the `html, body` selector.
+</Info>
+
+### Font Import
+
+The font is imported in `Head.astro` using Google Fonts:
+
+```html
+<!-- Preconnect to Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Onest Font -->
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+```
+
+<Note>
+The `wght@100..900` parameter loads all available font weights (variable font).
+</Note>
+
+### Global Font Declaration
+
+In `global.css`, Onest is applied to all elements:
+
+```css
+html, body {
+    font-family: 'Onest', sans-serif;
+    background-color: var(--color-neutral-white-900);
+    color: var(--color-neutral-black-900);
+}
+```
+
+## Heading Styles
+
+### H1 Styling
+
+The main heading (H1) uses large, bold typography for maximum impact:
+
+```css
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--color-neutral-black-900);
+}
+```
+
+<CardGroup cols={3}>
+  <Card title="Font Size" icon="text-size">
+    64px
+  </Card>
+  <Card title="Font Weight" icon="bold">
+    700 (Bold)
+  </Card>
+  <Card title="Color" icon="palette">
+    `--color-neutral-black-900` (#222222)
+  </Card>
+</CardGroup>
+
+### Usage Example
+
+```html
+<h1>Welcome to ZOODOM</h1>
+```
+
+This renders as a large, bold heading in near-black color.
+
+## Paragraph Styles
+
+### Body Text
+
+Paragraph text uses comfortable reading size with spacing:
+
+```css
+p {
+    font-size: 18px;
+    color: var(--color-neutral-gray-900);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+```
+
+<CardGroup cols={2}>
+  <Card title="Font Size" icon="text-size">
+    18px
+  </Card>
+  <Card title="Color" icon="palette">
+    `--color-neutral-gray-900` (#4B4B4B)
+  </Card>
+  <Card title="Top Margin" icon="arrow-up">
+    20px
+  </Card>
+  <Card title="Bottom Margin" icon="arrow-down">
+    30px
+  </Card>
+</CardGroup>
+
+<Tip>
+Paragraphs use a darker gray (`--color-neutral-gray-900`) instead of pure black for better readability.
+</Tip>
+
+### Usage Example
+
+```html
+<p>Discover the fauna and flora at our national zoo park.</p>
+```
+
+## Font Weights Available
+
+Since Onest is loaded as a variable font (100-900), you can use any weight:
+
+```css
+/* Thin */
+.text-thin { font-weight: 100; }
+
+/* Light */
+.text-light { font-weight: 300; }
+
+/* Regular */
+.text-regular { font-weight: 400; }
+
+/* Medium */
+.text-medium { font-weight: 500; }
+
+/* Semi-Bold */
+.text-semibold { font-weight: 600; }
+
+/* Bold */
+.text-bold { font-weight: 700; }
+
+/* Extra Bold */
+.text-extrabold { font-weight: 800; }
+
+/* Black */
+.text-black { font-weight: 900; }
+```
+
+## Special Typography Styles
+
+### Active Navigation Links
+
+Active navigation links receive special styling:
+
+```css
+a.active {
+    color: var(--color-brand-green-800) !important;
+    font-weight: 600;
+}
+```
+
+<Info>
+Active links use semi-bold weight (600) and the primary brand green color.
+</Info>
+
+### Usage in Navigation
+
+```html
+<a href="/" class="active">Home</a>
+```
+
+## Typography Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Headings" icon="heading">
+    Use H1 for main page titles. Maintain hierarchy with H2-H6 as needed.
+  </Card>
+  <Card title="Body Text" icon="paragraph">
+    Default paragraph styling provides good readability at 18px.
+  </Card>
+  <Card title="Font Weights" icon="weight-scale">
+    Use 400 for regular text, 600 for emphasis, 700 for headings.
+  </Card>
+  <Card title="Color Contrast" icon="eye">
+    Dark gray on white provides excellent readability.
+  </Card>
+</CardGroup>
+
+## Complete Typography System
+
+```css
+/* Font Family */
+html, body {
+    font-family: 'Onest', sans-serif;
+    background-color: var(--color-neutral-white-900);
+    color: var(--color-neutral-black-900);
+}
+
+/* Heading 1 */
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--color-neutral-black-900);
+}
+
+/* Paragraphs */
+p {
+    font-size: 18px;
+    color: var(--color-neutral-gray-900);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Active Links */
+a.active {
+    color: var(--color-brand-green-800) !important;
+    font-weight: 600;
+}
+```
