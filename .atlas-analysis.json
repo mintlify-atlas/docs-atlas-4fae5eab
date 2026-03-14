@@ -1,0 +1,67 @@
+{
+  "projectType": "frontend",
+  "projectName": "ZOODOM",
+  "projectDescription": "A zoo website built with Astro featuring species information, event calendar, visit planning, educational blog, and multimedia resources.",
+  "theme": "almond",
+  "primaryColor": "#246C32",
+  "lightColor": "#6DD281",
+  "darkColor": "#144A1F",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "introduction",
+          "installation",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Core Features",
+        "pages": [
+          "features/navigation",
+          "features/hero-section",
+          "features/layout-system",
+          "features/responsive-design"
+        ]
+      },
+      {
+        "group": "Components",
+        "pages": [
+          "components/head",
+          "components/layout",
+          "components/navbar"
+        ]
+      },
+      {
+        "group": "Styling",
+        "pages": [
+          "styling/color-system",
+          "styling/typography",
+          "styling/bootstrap-integration"
+        ]
+      },
+      {
+        "group": "Deployment",
+        "pages": [
+          "deployment/netlify",
+          "deployment/configuration"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Astro-based static site generation",
+    "Bootstrap 5 responsive design",
+    "Custom green color palette design system",
+    "Bilingual support (Spanish)",
+    "SEO and Open Graph meta tags",
+    "Responsive navigation with mobile menu"
+  ],
+  "publicApiSurface": [
+    "Head component (metadata management)",
+    "Layout component (page structure)",
+    "Global CSS variables (color system)",
+    "Astro configuration (site settings)"
+  ]
+}
